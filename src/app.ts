@@ -1,10 +1,14 @@
-import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser'
 import express from 'express'
+import logger from 'morgan'
 
 const app = express()
 const PORT = 3000
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(logger('dev'))
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+app.use(cookieParser())
 
 app.get('/', (req, res) => {
 	res.send('Hello world')
@@ -13,3 +17,5 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
 	console.log(`Express with Typescript! http://localhost:${PORT}`)
 })
+
+module.exports = app
